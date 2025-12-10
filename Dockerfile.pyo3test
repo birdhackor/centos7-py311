@@ -12,11 +12,11 @@ RUN apt-get install -y \
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
 
-RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN uv tool install maturin
 
-RUN maturin init /app/tpyo3
+RUN maturin init --name tpyo3 --mixed -b pyo3 /app/tpyo3 
 
 WORKDIR /app/tpyo3
 
