@@ -36,5 +36,5 @@ jobs:
           cache-to: type=gha,mode=max
           push: true
           context: .
-          file: {context}/Dockerfile.pyo3test
+          file: ./Dockerfile.pyo3test
           tags: birdhackor/pyo3test:latest,birdhackor/pyo3test:sha-${{ steps.vars_sha_short.outputs.sha_short }}
