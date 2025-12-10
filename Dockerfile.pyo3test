@@ -1,0 +1,23 @@
+FROM ghcr.io/astral-sh/uv:python3.14-trixie-slim
+
+WORKDIR /app
+
+# Update default packages
+RUN apt-get update
+
+# Get Ubuntu packages
+RUN apt-get install -y \
+    build-essential \
+    curl
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+
+RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
+
+RUN uv tool install maturin
+
+RUN maturin init /app/tpyo3
+
+WORKDIR /app/tpyo3
+
+RUN cargo vendor
